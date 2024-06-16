@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Scraping with Python</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      form {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      input[type="text"] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      .error-message {
+        color: red;
+        margin-top: 10px;
+      }
+      ul {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Web Scraping with Python</h1>
+      <form action="/scrape" method="post">
+        <label for="url">Enter URL to scrape:</label>
+        <input
+          type="text"
+          id="url"
+          name="url"
+          placeholder="https://example.com"
+          required
+        />
+        <button type="submit">Scrape</button>
+      </form>
+
+      {% if url %}
+      <h2>URL Scraped: {{ url }}</h2>
+      {% if extracted_links %}
+      <h3>Extracted Links:</h3>
+      <ul>
+        {% for link in extracted_links %}
+        <li>{{ link }}</li>
+        {% endfor %}
+      </ul>
+      <form action="/export_excel" method="post">
+        <input type="hidden" name="url" value="{{ url }}" />
+        <button type="submit">Export as Excel</button>
+      </form>
+      {% endif %} {% if error %}
+      <p class="error-message">{{ error }}</p>
+      {% endif %} {% endif %}
+    </div>
+  </body>
+</html>
