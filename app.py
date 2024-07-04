@@ -1,15 +1,15 @@
 import os
 from flask import Flask, render_template, request, send_file
 from bs4 import BeautifulSoup
-import requests
 import pandas as pd
+from security import safe_requests
 
 app = Flask(__name__)
 
 # Function to scrape data from URL
 def scrape_data(url):
     try:
-        response = requests.get(url)
+        response = safe_requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
         # Example: Extracting all links from the webpage
         links = soup.find_all('a')
