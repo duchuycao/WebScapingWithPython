@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Function to scrape data from URL
 def scrape_data(url):
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=60)
         soup = BeautifulSoup(response.text, 'html.parser')
         # Example: Extracting all links from the webpage
         links = soup.find_all('a')
